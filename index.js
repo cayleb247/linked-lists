@@ -4,15 +4,18 @@ class LinkedList {
     this.listTail = null;
   }
 
-  head() { // Complete
+  head() {
+    // Complete
     return this.listHead;
   }
 
-  tail() { // Complete
+  tail() {
+    // Complete
     return this.listTail;
   }
 
-  append(value) { // Complete
+  append(value) {
+    // Complete
     let newNode = new Node(value);
     if (!this.listHead) {
       this.listHead = newNode;
@@ -24,7 +27,8 @@ class LinkedList {
     }
   }
 
-  prepend(value) { // Complete
+  prepend(value) {
+    // Complete
     let newNode = new Node(value);
     if (!this.listHead) {
       this.listHead = newNode;
@@ -34,7 +38,8 @@ class LinkedList {
     }
   }
 
-  size() { // Complete
+  size() {
+    // Complete
     if (!this.listHead) {
       return 0;
     } else {
@@ -50,70 +55,77 @@ class LinkedList {
 
   at(index) {
     if (this.listHead) {
-        let currentNode = this.listHead;
-        for (let i=0; i<index; i++) {
-            currentNode = currentNode.nextNode;
-        }
-        return currentNode;
+      let currentNode = this.listHead;
+      for (let i = 0; i < index; i++) {
+        currentNode = currentNode.nextNode;
+      }
+      return currentNode;
     } else {
-        return null;
+      return null;
     }
   }
 
   pop() {
-    if (this.listTail) {
-      this.listTail = null;
+    // Check for only one element
+    if (this.listHead == this.listTail) {
+      this.listTail = undefined;
+      this.listHead = undefined;
+    } else if (this.listTail) {
       let currentNode = this.listHead;
-      while (currentNode.next) {
+      while (currentNode.nextNode.nextNode) {
         currentNode = currentNode.nextNode;
       }
       this.listTail = currentNode;
+      currentNode.nextNode = null;
     }
   }
 
-  contains(value) { // Complete
+  contains(value) {
+    // Complete
     if (!this.listHead) {
-        return false;
+      return false;
     } else {
-        let currentNode = this.listHead;
-        while (currentNode) {
-            if (currentNode.value == value) {
-                return true;
-            }
-            currentNode = currentNode.nextNode;
+      let currentNode = this.listHead;
+      while (currentNode) {
+        if (currentNode.value == value) {
+          return true;
         }
-        return false;
+        currentNode = currentNode.nextNode;
+      }
+      return false;
     }
   }
 
-  find(value) { // Complete
+  find(value) {
+    // Complete
     let index = 0;
     let currentNode;
     if (!this.listHead) {
-        return null;
+      return null;
     } else {
-        currentNode = this.listHead;
-        while (currentNode) {
-            if (currentNode.value == value) {
-                return index;
-            } else {
-                index += 1;
-                currentNode = currentNode.nextNode;
-            }
+      currentNode = this.listHead;
+      while (currentNode) {
+        if (currentNode.value == value) {
+          return index;
+        } else {
+          index += 1;
+          currentNode = currentNode.nextNode;
         }
-        return null;
+      }
+      return null;
     }
   }
 
-  toString() { // Complete
+  toString() {
+    // Complete
     if (this.listHead) {
-      let currentString = `(${ this.listHead.value })`;
+      let currentString = `(${this.listHead.value})`;
       let currentNode = this.listHead;
       while (currentNode.nextNode) {
-        currentString += ` => (${ currentNode.nextNode.value })`;
+        currentString += ` => (${currentNode.nextNode.value})`;
         currentNode = currentNode.nextNode;
       }
-      currentString += " -> null"
+      currentString += " -> null";
       return currentString;
     }
   }
